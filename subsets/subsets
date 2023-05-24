@@ -3,17 +3,27 @@ public:
 
     void solve(vector<int>& nums, vector<int> out, vector<vector<int>> &ans, int i)
     {
-        //base case
+        //base case reached
+        //means we got a result or combination so put it in the ans array and reuturn
         if(i>=nums.size())
         {
             ans.push_back(out);
             return;
         }
 
+
+
+
+
         //exclude
+        //just increase i and recusrion
         solve(nums,out,ans,i+1);
 
+
+
+
         //include
+        //include the ith ele into the array and recusrion
         out.push_back(nums[i]);
         solve(nums,out,ans,i+1);
 
@@ -29,6 +39,8 @@ public:
         //index
         int i=0;
 
+
+        //call function
         solve(nums,out,ans,i);
 
         return ans;
