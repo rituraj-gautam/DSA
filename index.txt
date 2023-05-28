@@ -1,6 +1,8 @@
 #Index
 
 1)Merge Sort .........Page No. ---  1-3
-2)Quick Sort
-3)Subsets
-4)Phone keypad
+2)Quick Sort .........              4-5
+3)Subsets    .......................6-7
+4)Phone keypad .....................8-12
+5)Permutations of a string .........13-14
+
