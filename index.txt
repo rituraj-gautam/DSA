@@ -9,6 +9,6 @@
 7)Middle of linked list ............15-16
 8)Reverse LL in k groups ........... 17
 9)Check LL is circular ............. 18
-10)Detect and remove loop from LL ... 19-20
+10)Detect (and remove) loop in LL ... 19-20
 11)Remove duplicates from sorted LL ... 20
 12) Remove duplicates from unsorted LL .. 21
