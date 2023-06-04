@@ -11,4 +11,4 @@
 9)Check LL is circular ............. 18
 10)Detect (and remove) loop in LL ... 19-20
 11)Remove duplicates from sorted LL ... 20
-12) Remove duplicates from unsorted LL .. 21
+12)Remove duplicates from unsorted LL .. 21
