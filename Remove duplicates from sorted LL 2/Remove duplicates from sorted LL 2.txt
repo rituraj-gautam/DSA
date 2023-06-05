@@ -1,0 +1,63 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+ ListNode* deleteDuplicates(ListNode* head) {
+
+         if(head == NULL || head->next == NULL)
+        {
+            return head;
+        }
+
+        
+
+        ListNode* curr = head;
+        
+        // make a new node that act as a dummy node and make its next as head ( not part of linked list but created so that we can increse prev from head to next by prev=prev->next by putting prev = dummy)
+
+
+        ListNode* dummy = new ListNode(0,head); // ListNode( val, next ) see up for syntax 
+        ListNode* prev = dummy;
+
+        while(curr!= NULL && curr->next != NULL)
+        {
+	
+		
+            if(curr->val != curr->next->val)
+            {
+                prev = prev->next;
+                curr = curr->next;
+
+            }
+
+
+
+
+
+
+            
+            //remember checking of if and while conditions takes place in written order so here order will be (curr!= NULL && curr->next!=NULL && curr->val == curr->next->val) and not (curr!= NULL && curr->next!=NULL && curr->val == curr->next->val)  as we first need to check if curr - > next is null or not and then if not null then we can check if curr and curr next are equal or not. here even if we dont
+            
+            else if(curr->val == curr->next->val)
+            {
+               while(curr!= NULL && curr->next!=NULL && curr->val == curr->next->val )
+               {
+                    curr = curr->next;
+               }
+
+               prev-> next = curr -> next;
+               curr=curr->next;
+            }
+        }
+
+        return dummy->next;
+    }
+};
