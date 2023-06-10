@@ -1,0 +1,84 @@
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+*/
+
+class Solution {
+private:
+    void add(Node* &head, Node* &tail, int val)
+    {
+        Node* temp = new Node(val);
+        if(head == NULL)
+        {
+            head = temp;
+            tail = temp;
+            return;
+        }
+
+        tail->next = temp;
+        tail = tail->next;
+
+
+    }
+
+
+public:
+    Node* copyRandomList(Node* head) {
+
+        Node* temp = head;
+        Node* clonetail = NULL;
+        Node* clonehead = NULL;
+
+        // if(head == NULL || head->next == NULL)
+        // {
+        //     add(clonehead, clonetail, head->val);
+        //     return clonehead;
+        // }
+        
+        //clone LL with next pointer and without random ptr
+        while(temp!=NULL)
+        {
+            add(clonehead, clonetail, temp->val);
+            temp = temp->next;
+        }
+
+        //create an unordered map tracking each node with its clone node
+        unordered_map<Node*, Node*> map;
+        Node* curr1 = head;
+        Node* curr2 = clonehead;
+
+        while(curr1 != NULL)
+        {
+            map[curr1] = curr2;
+            curr1 = curr1->next;
+            curr2 = curr2->next;
+        }
+
+
+        //now put random ptr in clone nodes by copying it from its mapped original node
+        curr1 = head;
+        curr2 = clonehead;
+
+        while(curr1 != NULL)
+        {
+            curr2->random = map[curr1->random];
+            curr1 = curr1->next;
+            curr2 = curr2->next;
+        }
+
+
+        
+        return clonehead;
+    }
+};
