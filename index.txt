@@ -17,4 +17,5 @@
 15)Merge 2 sorted LL ............ 26
 16)Check palindrome in LL ........ 27
 17)Add 2 numbers in LL ............ 28
-18)Clone a LL ..................... 29-3
+18)Clone a LL ..................... 29-31
+19)Merge sort in LL ................32
