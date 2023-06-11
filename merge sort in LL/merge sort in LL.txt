@@ -1,0 +1,115 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+private:
+    ListNode* findmid(ListNode* head)
+    {
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+       
+
+        while(fast != NULL && fast->next != NULL)
+        {
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        // cout<<slow->val<<endl;
+        return slow;
+    }
+
+
+    ListNode* merge(ListNode* &left, ListNode* &right)
+    {
+        //if any list is empty return the oppsoite
+        if(left == NULL)
+        {
+            return right;
+        }
+
+        if(right == NULL)
+        {
+            return left;
+        }
+
+
+        //make a dummy node, and a ptr tail. In this tail go on adding the smaller value node of the 2 lists till any one or both the lists become empty
+        ListNode* dummy = new ListNode(-1);
+        ListNode* tail = dummy;
+
+        while(left != NULL && right != NULL)
+        {
+            if(left->val < right->val)
+            {
+                tail->next = left;
+                tail = tail->next;
+                left = left->next;
+                
+            }
+
+            else
+            {
+                tail->next = right;
+                tail = tail->next;
+                right = right->next;
+            }
+        }
+
+
+
+        //after while loop ends it means either one or both the lists are finished , so check if any list if still not finished then add it to tail 
+        while(left != NULL)
+        {
+            tail->next = left;
+            tail = tail->next;
+            left = left->next;
+        }
+        while(right != NULL)
+        {
+            tail->next = right;
+            tail = tail->next;
+            right = right->next;
+        }
+
+
+        //return the list attached to the dummy node 
+        return dummy->next;
+
+
+    }
+    
+public:
+    ListNode* sortList(ListNode* head) {
+        
+        //base case 
+        if(head == NULL || head->next == NULL)
+        {
+            return head;
+        }
+
+
+        //break list into 2 halves
+        ListNode* left = head;
+        ListNode* mid = findmid(head);
+        ListNode* right = mid->next;
+
+        mid->next = NULL;
+
+
+        //recursive call to both halves
+
+        left = sortList(left);
+        right = sortList(right);
+
+        //merge
+
+        return merge(left,right);
+    }
+};
