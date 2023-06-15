@@ -38,3 +38,16 @@
 
 19)Merge sort in LL ................32
 
+20)Valid parenthesis ............... 33
+
+21)Delete middle element stack ...... 34
+
+22)Reverse string using stack ........ 35
+
+23)insert at bottom of stack ......... 35
+
+24)reverse stack ..................... 36-37
+
+25)redundant brackets .............. 38
+
+26)bracket reversals ................ 39
