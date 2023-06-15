@@ -1,0 +1,29 @@
+void solve(stack<int>& s, int x) {
+    //base case
+	//reached last case that is base case when all elements are popped out and stack is empty
+	// push the ele so that it goes in bottom
+    if(s.empty()) {
+        s.push(x);
+        return ;
+    }
+
+
+
+    //store the top ele in num and pop it out
+    int num = s.top();
+    s.pop();
+    
+    //recursive call
+    solve(s, x);
+    
+
+	//again store the top ele stored in num
+    s.push(num);
+}
+
+
+stack<int> pushAtBottom(stack<int>& myStack, int x) 
+{
+    solve(myStack, x);
+    return myStack;
+}

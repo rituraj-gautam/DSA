@@ -1,0 +1,28 @@
+void solve(stack<int>&inputStack, int count, int size) {
+    	//base case
+	//if middle element then pop it out
+    if(count == size/2) {
+        inputStack.pop();
+        return ;
+    }
+    
+
+	//store the top ele in num and pop it 
+    int num = inputStack.top();
+    inputStack.pop();
+    
+	//RECURSIVE CALL
+    solve(inputStack, count+1, size);
+    
+	//after returning from recursion, again put the top ele stored in num on top
+    inputStack.push(num);
+    
+}
+
+void deleteMiddle(stack<int>&inputStack, int N){
+	
+	//initiate a count to keep track of which ele in stack reached
+  	int count = 0;
+    solve(inputStack, count, N);
+   
+}

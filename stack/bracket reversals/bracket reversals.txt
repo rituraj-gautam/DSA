@@ -1,0 +1,57 @@
+#include<stack>
+int findMinimumCost(string str) {
+  	
+    //odd condition then not possible to make matching brackets
+    if(str.length()%2 == 1) {
+        return -1;
+    }
+    
+    stack<char> s;
+
+	//run loop for every char in string
+    for(int i=0; i<str.length(); i++) {
+        char ch = str[i];
+	
+	//if opening bracket then push it        
+        if(ch == '{') 
+            s.push(ch);
+
+	//if closing brakcet
+		else
+        {
+          
+		//if top is opening then we pop it as we dont take matching pair , we want only unmatched brackets in the stack
+            if(!s.empty() && s.top() == '{') {
+                s.pop();
+            }
+		
+		//if top is not opening we push the closing bracket
+            else
+            {
+                s.push(ch);
+            }
+        }
+    }
+    
+        //now stack contains only unmatched brackets
+
+	//now we store no. of opening brackets in 'a' and closing brackets in 'b'
+        int a = 0, b = 0;
+        while(!s.empty()) {
+            if(s.top() == '{') {
+                b++;
+            }
+            else
+            {
+                a++;
+            }
+            s.pop();
+        }
+
+		//now apply this formula to find no. of reversals needed
+        
+		int ans = (a+1)/2 + (b+1)/2;
+        return ans;
+    
+    
+}

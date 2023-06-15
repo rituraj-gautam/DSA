@@ -1,0 +1,47 @@
+#include<stack>
+
+bool findRedundantBrackets(string &s)
+{
+	//initialize a stack
+    stack<char> st;
+
+	//run for every char in stack 
+    for(int i=0; i<s.length(); i++) {
+        char ch =s[i];
+        
+	//if char is an opening bracket or an operator , push it
+        if(ch == '(' || ch == '+' ||ch == '-' || ch == '*' || ch == '/') {
+            st.push(ch);
+        }
+        else
+        {
+            //char is closing bracket or letter
+            
+		//if closing bracket, then set bool as true
+            if(ch == ')') {
+                bool isRedundant = true;
+              
+			//till opening bracket not reached, if top is operator mark bool false and pop top, otherwise if not opeator( opening bracket ) then pop it
+                while( st.top() != '(' ) 
+		   {
+                    char top = st.top();
+                    if(top == '+' ||top == '-' || top == '*' || top == '/') {
+                        isRedundant = false;
+                    }
+                    st.pop();
+                }
+                
+
+			//if it is such that operator was not present at top and top was opening bracket then bool is true, so return true and question is over 
+                if(isRedundant == true)
+                    return true;
+			//if bool not true then that means top was operator, so pop the opening bracket now and we move to next char after that through the for loop above 
+                st.pop();
+            }
+            
+        } 
+    }
+
+	//if after the above loop still reached here , means return true was not executed, means not redundant , so return false
+    return false;
+}

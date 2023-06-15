@@ -1,0 +1,66 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        
+        //initialize a stack to store string
+        stack<char>st;
+
+
+        //run loop till string ends
+        for(int i = 0; i<s.size(); i++)
+        {
+
+           //store the ith char in ch
+           char ch = s[i];
+           
+
+            //check if ith char is an opening bracket then push it in the stack
+            if(ch == '(' || ch == '{' || ch == '[' )
+            {
+                st.push(ch);
+            }
+
+            //if not an opening bracket
+            else
+            {
+                //if stack is not empty
+                if(!st.empty())
+                {
+                    //and its a closing bracket with the last inserted char ( st.top() ) is a matching opening bracket , then pop it out 
+                    if(ch == ')' && st.top()=='(' ||
+                    ch == '}'  && st.top()=='{' ||
+                    ch == ']'  && st.top()=='[' )
+                    {
+                        st.pop();
+                    }
+
+                    //if its not a closing bracket or if its a closing bracket but not matching with st.top(), then return false cause cant close the st.top() open bracket anyhow
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+                //if stack is empty
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+
+
+        //after all pushing and popping if at last stack becomes empty that means all brackets opened were matched with closed brackets ,so return true
+        if(st.empty())
+        {
+            return true;
+        }
+
+        //if comes out to be not empty then return false
+        else
+        {
+            return false;
+        }
+    }
+};

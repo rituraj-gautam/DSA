@@ -1,0 +1,33 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+
+
+
+int main () {
+    string str = "babbar";
+
+//push the string char by char into a stack s
+
+    stack<char> s;
+
+    for (int i = 0; i<str.length(); i++) {
+        char ch = str[i];
+        s.push(ch);
+    }
+
+
+//from this stack s, pop and put each char into a new string , ans and we will get the string in ans as reverse of str
+    string ans = "";
+
+    while(!s.empty()) {
+        char ch = s.top();
+        ans.push_back(ch);
+
+        s.pop();
+    }
+
+    cout << "answer is: "<< ans << endl;
+
+    return 0;
+}
