@@ -51,3 +51,9 @@
 25)redundant brackets .............. 38
 
 26)bracket reversals ................ 39
+
+27)next greater element .............. 40-42
+
+28)stock span ........................43-44
+
+29)largest rectangle in histogram .....44-46
