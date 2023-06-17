@@ -1,0 +1,140 @@
+class Solution {
+
+public:
+    vector<int> leftsmaller(vector<int>& heights)
+    {
+       stack<pair<int,int>> st;
+        vector<int> ans;
+    
+
+
+        for(int i=0; i<heights.size(); i++)
+        {
+            if(st.empty())
+            {
+                ans.push_back(-1);
+            }
+    
+            else if(!st.empty() && st.top().first < heights[i])
+            {
+                ans.push_back(st.top().second);
+    
+            }
+    
+            else if(!st.empty() && st.top().first >= heights[i])
+            {
+                while(!st.empty() && st.top().first >= heights[i])
+                {
+                    st.pop();
+                }
+    
+                if(st.empty())
+                {
+                    ans.push_back(-1);
+                }
+                else
+                {
+                    ans.push_back(st.top().second);
+                }
+            }
+    
+    
+            st.push({heights[i],i});
+        }
+        
+        //return the indexes in a vector
+        return ans;
+    }
+
+
+
+
+    vector<int> rightsmaller(vector<int>& heights)
+    {
+       stack<pair<int,int>> st;
+        vector<int> ans;
+    
+        for(int i=heights.size()-1; i>=0; i--)
+        {
+            if(st.empty())
+            {
+                ans.push_back(heights.size());
+            }
+    
+            else if(!st.empty() && st.top().first < heights[i])
+            {
+                ans.push_back(st.top().second);
+    
+            }
+    
+            else if(!st.empty() && st.top().first >= heights[i])
+            {
+                while(!st.empty() && st.top().first >= heights[i])
+                {
+                    st.pop();
+                }
+    
+                if(st.empty())
+                {
+                    ans.push_back(heights.size());
+                }
+                else
+                {
+                    ans.push_back(st.top().second);
+                }
+            }
+    
+    
+            st.push({heights[i],i});
+        }
+        
+        reverse(ans.begin(),ans.end());
+
+        //return the indexes in a vector
+        return ans;
+    }
+
+
+
+
+
+    int largestRectangleArea(vector<int>& heights) {
+        
+        //think of the histogram as buildings with given heights
+        
+        // 3 vectors--- width to store width or how much a building can be extended to both left and right
+        //l to store the prev smaller ele
+        //r to store the next smaller ele
+
+        vector<int> width;
+        vector<int> l;
+        vector<int> r;
+
+        l = leftsmaller(heights);
+        r = rightsmaller(heights);
+
+
+        //storing the width of every buildings
+        for(int i=0; i<heights.size(); i++)
+        {
+            width.push_back( r[i]-l[i]-1 );
+            
+        }
+
+
+        //calculating the area of every buildings
+        vector<int>area;
+        for(int i=0;i<heights.size();i++)
+        {
+            area.push_back( width[i]*heights[i] );
+        }
+
+        //find the max area of all the areas and return it
+        int maxarea = *max_element(area.begin(), area.end());
+        return maxarea;
+       
+
+
+
+    }
+};
