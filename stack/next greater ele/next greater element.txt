@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void nextgreaterele(int arr[], int n, vector<int> &ans)
+{
+    stack<int> st;
+    
+    //run loop from end side of array
+    for(int i=n-1;i>=0;i--)
+    {
+        //for last ele , no greater ele to right side so push -1 in ans
+        if(st.empty())
+        {
+            ans.push_back(-1);
+            
+        }
+
+        //if stack is not empty and top ele is greater than the arr[i], then push it in ans
+        else if(!st.empty() && st.top() > arr[i])
+        {
+            ans.push_back(st.top());
+
+        }
+
+        //if stack not empty but top ele is lesser than arr[i], then pop it till we get a greater ele or stack becomes empty
+        else if(!st.empty() && st.top() <= arr[i])
+        {
+            while(!st.empty() && st.top() <= arr[i])
+            {
+                st.pop();
+            }
+
+
+            //loop ended means either greater ele found or stack is empty, run for both cases
+
+            //if stack became empty then no ele greater than arr[i], so push -1
+            if(st.empty())
+            {
+                ans.push_back(-1);
+            }
+
+            //greater ele found at top, then push it
+            else
+            {
+                ans.push_back(st.top());
+            }
+        }
+
+
+
+        //push the arr[i] to stack after finding its greater ele
+        st.push(arr[i]);
+    }
+}
+
+int main()
+{
+int n;
+cin>>n;
+
+int arr[n];
+for(int i = 0; i<n; i++)
+{
+    cin>>arr[i];
+}
+
+
+vector<int> ans;
+
+nextgreaterele(arr,n,ans);
+
+for(int i=0; i<ans.size(); i++)
+{
+    cout<<ans[i]<<" ";
+}
+
+}
