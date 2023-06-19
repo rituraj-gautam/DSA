@@ -1,0 +1,74 @@
+class MinStack {
+public:
+
+	
+    //main stack
+    stack<int> s1;
+    //extra stack to store min 
+    stack<int> s2;
+
+    MinStack() {
+        
+    }
+    
+    
+	void push(int val) {
+
+        s1.push(val);
+
+	//if s2 is empty push it as it will be the min element for now as only 1 ele is there that is itself
+	//or if val is less than s2.top(), i.e., less than prev min ele then also push it
+        if(s2.empty() || val<=s2.top())
+        {
+            s2.push(val);
+        }
+
+        
+    }
+    
+    void pop() {
+
+	if(s1.empty())
+        {
+            return;
+        }
+        
+        int num=s1.top();
+        s1.pop();
+
+//if to be popped val is min value stored in s2 then pop from s2 as well
+        if(num == s2.top())
+        {
+            s2.pop();
+        }
+
+    }
+    
+    int top() {
+	
+	if(s1.empty())
+        {
+            return -1;
+        }
+
+        return s1.top();
+    }
+    
+    int getMin() {
+
+	if(s1.empty())
+        {
+            return -1;
+        }
+        return s2.top();
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
