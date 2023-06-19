@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+
+		//result to store total area covered or submerged
+        int result = 0;
+
+
+	//run loop for each building except 1st and last as 1st and last building cant store water as for 1st building left max is 0 and for last right max is 0
+        for(int i=1; i<height.size()-1; i++)
+        {
+            //left to store leftmax and right to store rightmax for the ith building
+		int left=0;
+            int right=0;
+
+		
+		for leftmax find from 1st building to before ith building which height is max 
+            for(int j=0; j<i; j++)
+            {
+                left = max(left,height[j]); //store the max value of --- prev stored value of left and val of current height of building
+
+            }
+
+
+		//for rightmax do it from after ith building till last
+            for(int k=height.size()-1; k>i; k--)
+            {
+                right=max(right,height[k]); //same as left
+            }
+
+
+
+
+		
+		//if any water is stored above any building we get by this formula and if formula gives a positive value i.e. water stored above the ith building is >0 means some water stored above it , so add it in result
+
+            if(min(left,right)-height[i]>0)
+            {
+            result+=(min(left,right)-height[i]);
+            }
+            
+        }
+
+        return result;
+    }
+};

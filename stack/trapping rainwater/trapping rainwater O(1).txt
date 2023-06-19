@@ -1,0 +1,66 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n=height.size();
+
+	//take 2 var maxleft and maxright to store max left and right value of the ith building
+        int maxleft=0;
+        int maxright=0;
+
+
+        int result=0;
+
+//2 pointers to move from left and right to middle till l<=r
+        int l=0;
+        int r=n-1;
+
+//move l and r till they dont cross
+        while(l<=r)
+        {
+
+		//check which is smaller , left height or right height , whichever smaller take that
+
+            
+		//if left is smaller
+		if(height[l]<=height[r])
+            {
+                if(height[l]>maxleft)
+                {
+                    maxleft=height[l]; //update maxleft if height of Lth building is more than maxleft
+                }
+
+                else
+                {
+                    result+=maxleft-height[l]; //add area of water stored by Lth building to result
+                }
+
+                l++; //move l
+
+            }
+
+
+		//if right is smaller
+            else
+            {
+			//proceed as same as left is smaller
+                if(height[r]>maxright)
+                {
+                    maxright=height[r];
+                }
+                else
+                {
+                    result+=maxright-height[r];
+                }
+
+                r--;
+            }
+        }
+
+        return result;
+
+
+    }
+};
+
+
+//here we calculated the area of water trapped by each building and added it to result , all as we traverse the ith building from 1st to last in one loop only

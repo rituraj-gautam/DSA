@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n=height.size();
+
+	//made two arrays to store the left and right max for every buildings
+        int left[n];
+        int right[n];
+
+
+        int result =0;
+
+
+	//put leftmax of 1st building as same as height of 1st building and rightmax of last building as height of last building itself 
+        left[0]=height[0];
+        right[n-1]=height[n-1];
+
+
+//make both the array by comapring the current height and prev left/right
+       for(int i=1; i<n; i++)
+       {
+           left[i]=max(left[i-1],height[i]);
+       }
+       for(int i=n-2; i>=0; i--)
+       {
+           right[i]=max(right[i+1],height[i]);
+       }
+
+
+
+//add area above each building
+       
+       for(int i=0; i<n; i++)
+       {     
+
+           result+=min(left[i],right[i])-height[i];
+           
+       }
+       
+       return result;
+    }
+};
