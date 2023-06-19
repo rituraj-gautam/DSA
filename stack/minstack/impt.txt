@@ -1,0 +1,2 @@
+there is another way of doing it using pais in stack see striver 1st soln
+https://takeuforward.org/data-structure/implement-min-stack-o2n-and-on-space-complexity/
