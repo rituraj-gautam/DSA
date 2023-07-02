@@ -59,3 +59,5 @@
 29)largest rectangle in histogram .....44-46
 
 30)Trapping rainwater .................. 47-50
+
+31)Minstack ..............................51-53
