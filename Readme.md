@@ -64,4 +64,4 @@
 
 32)The Celebrity Problem .................57-60
 
-33)
+33)First negative integer in every window of size k 54-56
