@@ -1,0 +1,60 @@
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution {
+	public:
+		string FirstNonRepeating(string A){
+		    map<char, int> m; //to store cnt of each char
+		    string ans = ""; //ans string
+		    queue<char> q; 
+		    
+		    //run till end
+		    for(int i=0; i<A.length(); i++) {
+		        char ch = A[i];
+		        
+		        //push each char in queue and increase its cnt in map
+		        q.push(ch);
+		        m[ch]++;
+		    
+		        //run till queue is not empty
+		        while(!q.empty()) {
+		            if(m[q.front()] > 1) //if char's cnt is >1, i.e. it is repeating char then pop it
+		            {
+		                q.pop();
+		            }
+		            
+		            else // otherwise push it in ans and break while loop
+		            {
+		                ans.push_back(q.front());
+		                break;
+		            }
+		        }
+		        
+		        //while loop ends here means either q became empty or it encountered break statement
+		        //if q became empty then push # in ans
+		        if(q.empty()){
+		            ans.push_back('#');
+		        }
+		    }
+		    
+		    return ans;
+		}
+
+};
+
+//{ Driver Code Starts.
+int main(){
+	int tc;
+	cin >> tc;
+	while(tc--){
+		string A;
+		cin >> A;
+		Solution obj;
+		string ans = obj.FirstNonRepeating(A);
+		cout << ans << "\n";
+	}
+	return 0;
+}
+// } Driver Code Ends

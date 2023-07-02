@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int deficit = 0; //to store -ve balance
+        int balance = 0; //to store +ve balance
+        int start = 0; // the starting index such that can run one circle
+
+
+        //run loop till end
+        for(int i = 0; i<gas.size(); i++)
+        {
+            balance+= gas[i]-cost[i]; // calclate balance 
+            if(balance<0) // if bal comes out to be -ve then store it in deficit and increase start to next position. Then reset bal to 0.
+            {
+                start = i+1;
+                deficit+= balance;
+                balance = 0;
+            }
+        }
+
+
+        //after calculating for every index , if final comes out to be negative that means its not possible, otherwise if >=0 means possible, so return start
+        if(balance + deficit < 0)
+        {
+            return -1;
+        }
+
+        return start;
+    }
+};

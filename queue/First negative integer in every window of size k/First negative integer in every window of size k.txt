@@ -1,0 +1,82 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<long long> printFirstNegativeInteger(long long int arr[],
+                                             long long int n, long long int k);
+
+// Driver program to test above functions
+int main() {
+    long long int t, i;
+    cin >> t;
+    while (t--) {
+        long long int n;
+        cin >> n;
+        long long int arr[n];
+        for (i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+        long long int k;
+        cin >> k;
+
+        vector<long long> ans = printFirstNegativeInteger(arr, n, k);
+        for (auto it : ans) cout << it << " ";
+        cout << endl;
+    }
+    return 0;
+}
+
+// } Driver Code Ends
+
+
+vector<long long> printFirstNegativeInteger(long long int A[],
+                                             long long int N, long long int K) 
+{
+                                                 
+  queue<long long int>q;
+  vector<long long int>ans;
+  
+int i=0;
+int j= 0;
+
+
+//run loop till end of array
+while(j<N)
+{
+    if(A[j]<0) //push the jth ele in q if its -ve
+    {
+        q.push(A[j]);
+    }
+    
+    if(j-i+1<K) // if window not reached then increase j
+    {
+        j++;
+    }
+    
+    else if(j-i+1==K) //if window reached
+    {
+        if(!q.empty()) //if q is not empty means -ve ele present so push it from front to ans
+        {
+            ans.push_back(q.front());
+        }
+        else // if q is empty then no -ve ele for this window , so push 0
+        {
+            ans.push_back(0);
+        }
+        
+        if(A[i]<0) //if we had a -ve ele in the q ( that we pushed to ans), pop it
+        {
+            q.pop();
+        }
+        
+        //move to next window by increasing i and j
+        i++;
+        j++;
+    }
+}
+                                    
+                                                 
+    return ans;                                             
+                                                 
+                                                 
+ }
