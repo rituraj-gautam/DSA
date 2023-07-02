@@ -66,4 +66,8 @@
 
 33)First negative integer in every window of size k 54-56
 
-34)First non-repeating character in a stream ..65-66
+34)Reverse First K elements of Queue.......61
+
+35) Gas Station ...........................62-64
+
+36)First non-repeating character in a stream ..65-66
