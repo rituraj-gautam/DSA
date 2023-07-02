@@ -65,3 +65,5 @@
 32)The Celebrity Problem .................57-60
 
 33)First negative integer in every window of size k 54-56
+
+34)First non-repeating character in a stream ..65-66
