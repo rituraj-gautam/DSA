@@ -1,0 +1,136 @@
+{ Driver Code Starts
+Initial template for C++
+
+#includebitsstdc++.h
+using namespace std;
+
+ } Driver Code Ends
+User function template for C++
+
+class Solution 
+{
+    public
+    Function to find if there is a celebrity in the party or not.
+    int celebrity(vectorvectorint & M, int n) 
+    {
+        stackintst;
+        
+        
+        put every person in a stack
+        for(int i=0;in;i++)
+        {
+            st.push(i);
+        }
+        
+        
+        run loop till more than 1 person in stack 
+        while(st.size()1)
+        {
+            
+            take the top 2 person of the stack and store it in 'a' and 'b' and pop them
+            int a=st.top();
+            st.pop();
+            
+            int b=st.top();
+            st.pop();
+            
+            
+            check if a knows b
+            if a knows b then a cant be celebrity so push b ( celebrity knows no one)
+            if(M[a][b]==1)
+            {
+                st.push(b);
+            }
+            
+            if a doesn't know b, b cant be celebrity , so push a ( celebrity is known by all)
+            else
+            {
+                st.push(a);
+            }
+        }
+        
+        
+        after loop ends we have one person in stack which is a potential celebrity, so store it in ans
+        int ans = st.top();
+        
+        check if ans is really a celebrity
+        
+        see if the ans row has all 0s , i.e, no. of 0s = n
+        bool row=false;
+        int zerocnt = 0;
+        
+        for(int i=0;in;i++)
+        {
+            if(M[ans][i]==0)
+            {
+                zerocnt++;
+            }
+        }
+        
+        if(zerocnt == n)
+        {
+            row = true;
+        }
+        
+        
+        
+        see if the ans column has all 1s except at itself ( where i=j=ans ) , i.e, no. of 1s = n-1
+        bool col=false;
+        int onecnt = 0;
+        
+        for(int i=0;in;i++)
+        {
+            if(M[i][ans]==1)
+            {
+                onecnt++;
+            }
+        }
+        
+        if(onecnt == n-1)
+        {
+           col = true;
+        }
+        
+        
+        
+        
+        if no. of 0s is n and 1s is n-1, then ans is a celebrity
+        if(row && col)
+        {
+            return ans;
+        }
+        
+        otherwise he is not
+        else
+        {
+            return -1;
+        }
+        
+    }
+};
+
+{ Driver Code Starts.
+
+int main()
+{
+    int t;
+    cint;
+    while(t--)
+    {
+        int n;
+        cinn;
+        vectorvectorint  M( n , vectorint (n, 0));
+        for(int i=0;in;i++)
+        {
+            for(int j=0;jn;j++)
+            {
+                cinM[i][j];
+            }
+        }
+        Solution ob;
+        coutob.celebrity(M,n)endl;
+
+    }
+}
+
+ } Driver Code Ends
