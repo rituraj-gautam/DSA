@@ -57,3 +57,5 @@
 28)stock span ........................43-44
 
 29)largest rectangle in histogram .....44-46
+
+30)Trapping rainwater .................. 47-50
