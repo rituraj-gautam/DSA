@@ -71,3 +71,5 @@
 35) Gas Station ...........................62-64
 
 36)First non-repeating character in a stream ..65-66
+
+37) LRU .......................................67-69
