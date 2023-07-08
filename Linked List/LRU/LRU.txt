@@ -1,0 +1,105 @@
+class LRUCache {
+public:
+
+
+    //make a node class and its constructor as we need doubly LL for this question
+    class node{
+        public:
+
+        int data;
+        int key;
+        node* prev;
+        node* next;
+
+
+        node(int data_,int key_)
+        {
+            this->data = data_;
+            this->key = key_;
+            this->next = NULL;
+            this->prev = NULL;
+        }
+    };
+
+
+    //make a head and tail
+    node* head = new node(-1,-1);
+    node* tail = new node(-1,-1);
+
+    //capacity of LRUCache
+    int cap;
+    //map to store key and address of the node having the key
+    unordered_map<int, node*> map;
+
+    //LRUCache constructor
+    LRUCache(int capacity) {
+    cap = capacity;
+    head->next = tail;
+    tail->prev = head;      
+    }
+
+    //addnode function
+    void addnode(node* newnode)
+    {
+        node* temp = head->next;
+        newnode->next = temp;
+        newnode->prev = head;
+
+        head->next = newnode;
+        temp->prev = newnode;
+    }
+
+    //deletenode function
+    void deletenode(node* delnode)
+    {
+        node* dprev = delnode->prev;
+        node* dnext = delnode->next;
+
+        dprev->next = dnext;
+        dnext->prev = dprev;
+    }
+    
+
+    int get(int key_) {
+        if(map.find(key_) != map.end()) //see if key is not in map , then...
+        {
+            node* keynode = map[key_]; //ptr keynode to point to the node having key
+            int val = keynode->data; //get the value of keynode
+            map.erase(key_); //erase the key from map
+            deletenode(keynode); //delete the node from LL ( actually it is detached from the LL but the node is there, so in next step we again put it back)
+            addnode(keynode); //add the node ( it will be added just after head )
+            map[key_] = head->next; //store the address of this node (keynode) in map
+            return val; // return the value of the keynode
+        }
+
+        //if key is not in map, then ele not in LL , so no value to return....
+        return -1;
+    }
+    
+    void put(int key_, int value) {
+        if(map.find(key_) != map.end()) //see if key is not in map , then...
+        {
+            node* keynode = map[key_]; //ptr keynode to point to the node having key
+            map.erase(key_); //erase the key from map
+            deletenode(keynode); //delete the node from LL
+        }
+
+        if(map.size() == cap) //if maxsize or capacity is reached, 
+        {
+            //delete the LRU item , which will be just before tail , i.e., tail->prev
+            map.erase(tail->prev->key); //delete from map
+            deletenode(tail->prev); // delete from LL
+
+        }
+
+        addnode(new node(value,key_)); //add the node to put in LL
+        map[key_] = head->next; //store its address in map
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
