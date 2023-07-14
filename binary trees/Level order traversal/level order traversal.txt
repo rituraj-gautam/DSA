@@ -1,0 +1,59 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> ans; //ans to be stored in this vector
+
+        //if no ele , return ans
+        if(root == NULL)
+        {
+            return ans;
+        }
+
+        
+        //q to input the nodes of a level
+        queue<TreeNode*> q;
+        //input the 1st level ,i.e., the root
+        q.push(root);
+
+        
+        while(!q.empty())
+        {
+            vector<int> level; //this will store each level's nodes and since it will initialize each time in loop so it will store only the current level at a time
+
+
+            int size = q.size(); //take the size variable to store the size as if we take q.size() in for loop , it will give wrong ans as inside the loop q.size is changing
+           for(int i=0; i<size; i++)
+           {
+               //take the front ele and pop it
+               TreeNode* temp = q.front(); 
+                q.pop();
+
+                //if it has left and right push it in q
+                if(temp->left != NULL) q.push(temp->left);
+                if(temp->right != NULL) q.push(temp->right);
+
+                //push the temp in level 
+                //this will store every ele of the current level as for loop proceeds
+                level.push_back(temp->val);
+                
+           }
+
+            //after every level is finished , store them in ans
+           ans.push_back(level);
+            
+        }
+
+        return ans;
+    }
+};
